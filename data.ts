@@ -241,9 +241,9 @@ export const receitasBoasFestasData: ProductData = {
       reviewsCount: 42,
       images: [
         'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-receitas-boas-festas.webp',
-        'https://picsum.photos/seed/festas1/800/800',
-        'https://picsum.photos/seed/festas2/800/800',
-        'https://picsum.photos/seed/festas3/800/800',
+        'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/boas-festas-pagina-exemplo-2.webp',
+        'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/boas-festas-pagina-exemplo-3.webp',
+        'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/boas-festas-pagina-exemplo-4.webp',
       ],
       price: '47,90',
       originalPrice: '97,90',
