@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import StarRating from './StarRating';
+import type { ProductData } from '../types';
 
 const ChevronLeftIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -19,7 +20,11 @@ const XIcon = () => (
     </svg>
 );
 
-const ProductInfo = () => {
+interface ProductInfoProps {
+  data: ProductData['info'];
+}
+
+const ProductInfo: React.FC<ProductInfoProps> = ({ data }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isZoomModalOpen, setIsZoomModalOpen] = useState(false);
 
@@ -29,34 +34,20 @@ const ProductInfo = () => {
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
 
-  const bookData = {
-    title: 'Pães Sem Glúten',
-    subtitle: 'Receitas Fáceis e Práticas para o seu Dia a Dia',
-    author: 'Dra. Luciene Marques',
-    rating: 4.9,
-    reviewsCount: 66,
-    images: [
-      'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-paes-sem-gluten.webp',
-      'https://picsum.photos/seed/breadA/800/800',
-      'https://picsum.photos/seed/breadB/800/800',
-      'https://picsum.photos/seed/breadC/800/800',
-    ],
-    formats: {
-      hardcover: { price: '24,99', currency: 'US$' },
-      kindle: { price: '79,90', currency: 'R$' }
-    }
-  };
+  const images = data.images || [];
 
   const goToPrevious = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (images.length === 0) return;
     const isFirstImage = currentImageIndex === 0;
-    const newIndex = isFirstImage ? bookData.images.length - 1 : currentImageIndex - 1;
+    const newIndex = isFirstImage ? images.length - 1 : currentImageIndex - 1;
     setCurrentImageIndex(newIndex);
   };
 
   const goToNext = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const isLastImage = currentImageIndex === bookData.images.length - 1;
+    if (images.length === 0) return;
+    const isLastImage = currentImageIndex === images.length - 1;
     const newIndex = isLastImage ? 0 : currentImageIndex + 1;
     setCurrentImageIndex(newIndex);
   };
@@ -66,6 +57,7 @@ const ProductInfo = () => {
   };
   
   const handleOpenZoom = () => {
+    if (images.length === 0) return;
     setPanOffset({ x: 0, y: 0 }); // Reset pan on open
     setIsZoomModalOpen(true);
   };
@@ -125,20 +117,24 @@ const ProductInfo = () => {
            <div className="relative group">
               <button onClick={handleOpenZoom} className="w-full cursor-zoom-in" aria-label="Ampliar imagem">
                   <img
-                    src={bookData.images[currentImageIndex]}
-                    alt={`Capa do livro Pães Sem Glúten - Visualização ${currentImageIndex + 1}`}
+                    src={images[currentImageIndex]}
+                    alt={`Capa do livro ${data.title} - Visualização ${currentImageIndex + 1}`}
                     className="w-full h-auto object-cover rounded-md shadow-lg transition-transform duration-300 group-hover:scale-105"
                   />
               </button>
-               <button onClick={goToPrevious} className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/60 hover:bg-white/90 rounded-full p-2 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Imagem anterior">
-                  <ChevronLeftIcon />
-               </button>
-               <button onClick={goToNext} className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/60 hover:bg-white/90 rounded-full p-2 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Próxima imagem">
-                  <ChevronRightIcon />
-               </button>
+               {images.length > 1 && (
+                 <>
+                   <button onClick={goToPrevious} className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/60 hover:bg-white/90 rounded-full p-2 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Imagem anterior">
+                      <ChevronLeftIcon />
+                   </button>
+                   <button onClick={goToNext} className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/60 hover:bg-white/90 rounded-full p-2 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Próxima imagem">
+                      <ChevronRightIcon />
+                   </button>
+                 </>
+               )}
            </div>
           <div className="flex justify-center mt-4 space-x-2">
-            {bookData.images.map((image, index) => (
+            {images.map((image, index) => (
               <button key={index} onClick={() => goToImage(index)} className="rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 <img
                   src={image}
@@ -153,18 +149,18 @@ const ProductInfo = () => {
 
       {/* Info Section */}
       <div className="lg:col-span-3">
-        <h1 className="text-3xl font-bold text-gray-900">{bookData.title}</h1>
-        <h2 className="text-xl text-gray-600 mt-1">{bookData.subtitle}</h2>
+        <h1 className="text-3xl font-bold text-gray-900">{data.title}</h1>
+        <h2 className="text-xl text-gray-600 mt-1">{data.subtitle}</h2>
         <div className="mt-2">
-          <a href="#" className="text-lg text-blue-600 hover:underline">por {bookData.author}</a>
+          <a href="#" className="text-lg text-blue-600 hover:underline">por {data.author}</a>
         </div>
         <div className="mt-4 flex items-center space-x-2">
-          <StarRating rating={bookData.rating} />
-          <a href="#reviews" className="text-blue-600 hover:underline">({bookData.reviewsCount} avaliações)</a>
+          <StarRating rating={data.rating} />
+          <a href="#reviews" className="text-blue-600 hover:underline">({data.reviewsCount} avaliações)</a>
         </div>
         
         <div className="mt-6 pt-6 border-t border-gray-200">
-            <p className="text-base text-gray-600">Aprenda a criar pães sem glúten que são tão deliciosos quanto nutritivos, usando receitas simples e práticas que você pode fazer em casa.</p>
+            <p className="text-base text-gray-600">{data.descriptionShort}</p>
         </div>
         
         <div className="mt-6">
@@ -181,14 +177,14 @@ const ProductInfo = () => {
             <h3 className="text-lg font-medium text-gray-800">Edição Digital</h3>
             <div className="flex items-baseline text-gray-500">
               <span>De:</span>
-              <span className="line-through ml-1">R$ 127,90</span>
+              <span className="line-through ml-1">R$ {data.originalPrice}</span>
             </div>
             <div className="flex items-baseline">
               <span className="text-lg font-medium text-gray-800">Por:</span>
-              <span className="text-3xl font-bold text-red-600 ml-2">R$ 79,90</span>
+              <span className="text-3xl font-bold text-red-600 ml-2">R$ {data.price}</span>
             </div>
             <p className="text-sm font-semibold text-green-700">
-              Você economiza R$ 48,00 (38%)
+              Você economiza R$ {data.discountAmount} ({data.discountPercentage})
             </p>
           </div>
           
@@ -199,7 +195,7 @@ const ProductInfo = () => {
                 ✨ Oferta especial por tempo limitado!
              </div>
              <a 
-               href="https://payfast.greenn.com.br/95798/offer/4NlTSY" 
+               href={data.purchaseLink} 
                target="_blank" 
                rel="noopener noreferrer"
                className="block w-full bg-green-700 hover:bg-green-800 text-center text-white font-bold py-3 rounded-lg shadow-md transition duration-300"
@@ -215,7 +211,7 @@ const ProductInfo = () => {
       </div>
       
       {/* Zoom Modal with Panning */}
-      {isZoomModalOpen && (
+      {isZoomModalOpen && images[currentImageIndex] && (
         <div 
             className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
             onClick={handleCloseZoom}
@@ -228,8 +224,8 @@ const ProductInfo = () => {
                 <div className="max-w-[90vw] max-h-[90vh] overflow-hidden rounded-lg shadow-2xl bg-black">
                   <img 
                       ref={imageRef}
-                      src={bookData.images[currentImageIndex]} 
-                      alt={`Visão ampliada de ${bookData.title}`}
+                      src={images[currentImageIndex]} 
+                      alt={`Visão ampliada de ${data.title}`}
                       className={`transition-transform duration-75 ease-out w-auto h-auto max-w-none max-h-none ${isPanning ? 'cursor-grabbing' : 'cursor-grab'}`}
                       style={{ 
                         transform: `scale(1.75) translate(${panOffset.x}px, ${panOffset.y}px)`,

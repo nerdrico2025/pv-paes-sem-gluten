@@ -2,74 +2,9 @@ import React, { useRef } from 'react';
 import type { RelatedProduct } from '../types';
 import StarRating from './StarRating';
 
-const relatedProductsData: RelatedProduct[] = [
-    { 
-        id: 1, 
-        imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-boas-festas-natal-es.webp', 
-        title: 'Receitas Boas Festas', 
-        rating: 4.5, 
-        reviews: 25, 
-        format: 'Livro Digital', 
-        price: '47,90',
-        link: 'https://payfast.greenn.com.br/85615/offer/QgiCbr'
-    },
-    { 
-        id: 2, 
-        imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-acompanhamentos-spreads.webp', 
-        title: 'Acompanhamentos e Spreads', 
-        rating: 4.5, 
-        reviews: 15, 
-        format: 'Livro Digital', 
-        price: '74,90', 
-        tag: 'Recém-lançado', 
-        tagColor: 'border-gray-500',
-        link: 'https://payfast.greenn.com.br/95811/offer/qIElp9'
-    },
-    { 
-        id: 3, 
-        imageUrl: 'https://picsum.photos/seed/related3/400/600', 
-        title: 'Páscoa sem Glúten', 
-        rating: 4.5, 
-        reviews: 19, 
-        format: 'Livro Digital', 
-        price: '47,90', 
-        tag: 'Recém-lançado', 
-        tagColor: 'border-gray-500',
-        link: 'https://payfast.greenn.com.br/85616/offer/EVO92z'
-    },
-    { 
-        id: 4, 
-        imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-massa-perfeita.webp', 
-        title: 'Massas Sem Glúten', 
-        rating: 5, 
-        reviews: 143, 
-        format: 'Livro Digital', 
-        price: '109,90', 
-        tag: '1º mais vendido', 
-        tagColor: 'bg-orange-700 text-white',
-        link: 'https://payfast.greenn.com.br/95806/offer/aTvi6q'
-    },
-    { 
-        id: 5, 
-        imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-bebidas-vegetais.webp', 
-        title: 'Bebidas Vegetais', 
-        rating: 5, 
-        reviews: 152, 
-        format: 'Livro Digital', 
-        price: '96,90',
-        link: 'https://payfast.greenn.com.br/95808/offer/8dfIdp'
-    },
-    { 
-        id: 7, 
-        imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-farinhas-alternativas.webp', 
-        title: 'Explorando Farinhas Alternativas', 
-        rating: 4.5, 
-        reviews: 129, 
-        format: 'Livro Digital', 
-        price: '85,90',
-        link: 'https://payfast.greenn.com.br/95807/offer/XXp325'
-    },
-];
+interface RelatedProductsProps {
+    products: RelatedProduct[];
+}
 
 const ChevronLeftIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -83,7 +18,7 @@ const ChevronRightIcon = () => (
     </svg>
 );
 
-const RelatedProducts = () => {
+const RelatedProducts: React.FC<RelatedProductsProps> = ({ products }) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     const scroll = (direction: 'left' | 'right') => {
@@ -112,7 +47,7 @@ const RelatedProducts = () => {
                     ref={scrollContainerRef}
                     className="flex space-x-4 overflow-x-hidden py-4"
                 >
-                    {relatedProductsData.map((product) => (
+                    {products.map((product) => (
                         <div key={product.id} className="flex-shrink-0 w-48">
                             <div className="flex flex-col h-full text-left">
                                 <a href={product.link || '#'} className="block mb-2" target="_blank" rel="noopener noreferrer">

@@ -1,4 +1,5 @@
 import React from 'react';
+import type { HighlightsData } from '../types';
 
 const PlayIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -25,28 +26,40 @@ const BookOpenIcon = () => (
   </svg>
 );
 
-const ProductHighlights = () => {
+interface ProductHighlightsProps {
+  data: HighlightsData;
+}
+
+const ProductHighlights: React.FC<ProductHighlightsProps> = ({ data }) => {
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left side: Video */}
-        <div>
-          <div className="relative rounded-lg overflow-hidden group cursor-pointer shadow-lg">
-            <img src="https://picsum.photos/seed/highlightsvid/800/600" alt="Vídeo de apresentação do livro" className="w-full h-auto transition-transform duration-300 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <div className="p-4 bg-black/50 rounded-full">
-                <PlayIcon />
+        <div className="w-full">
+           {data.videoEmbedHtml ? (
+               <div 
+                 className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg"
+                 dangerouslySetInnerHTML={{ __html: data.videoEmbedHtml }}
+               />
+           ) : (
+              <div className="relative rounded-lg overflow-hidden group cursor-pointer shadow-lg">
+                <img src={data.videoThumbnail || "https://picsum.photos/seed/highlightsvid/800/600"} alt="Vídeo de apresentação do livro" className="w-full h-auto transition-transform duration-300 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                  <div className="p-4 bg-black/50 rounded-full">
+                    <PlayIcon />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+           )}
         </div>
 
         {/* Right side: Text and Banners */}
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Descubra os Segredos do Pão Perfeito</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">{data.title}</h2>
           <div className="space-y-4 text-gray-600">
-            <p>Redescubra o prazer de uma fatia de pão quente e crocante, sem se preocupar com o glúten. Dra. Luciene Marques desmistifica a panificação sem glúten, ensinando técnicas que resultam em pães e doces com textura e sabor que rivalizam com as melhores padarias tradicionais. Diga adeus aos pães densos e sem graça!</p>
-            <p>Este não é apenas um livro de receitas, é um curso completo que lhe dará a confiança para assar com sucesso. Desde a criação do seu próprio fermento natural sem glúten até a maestria de croissants folhados, você aprenderá os segredos de uma especialista premiada. Surpreenda sua família e amigos com criações deliciosas que ninguém acreditará serem sem glúten.</p>
+            {data.description.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+            ))}
           </div>
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
             <div className="bg-blue-50 p-4 rounded-lg flex flex-col items-center justify-center h-full">

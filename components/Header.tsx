@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MenuIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,10 +34,10 @@ const Header = () => {
                         <button className="p-2 lg:hidden">
                             <MenuIcon />
                         </button>
-                        <a href="#" className="flex items-center space-x-3">
+                        <Link to="/" className="flex items-center space-x-3">
                             <img src="https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/logo_chefglutenfree-red.png" alt="ChefGlutenFree Logo" className="h-10" />
                             <span className="text-2xl font-bold">ChefGlutenFree</span>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="hidden lg:flex flex-1 items-center justify-center mx-8 space-x-8">
@@ -64,10 +65,9 @@ const Header = () => {
                            </div>
                         </div>
                     </div>
-
-                    <div className="flex items-center space-x-4">
-                       {/* Itens removidos conforme solicitado */}
-                    </div>
+                    
+                    {/* Removed navigation links from here */}
+                    <div className="w-10 lg:w-0"></div>
                 </div>
             </div>
         </header>
