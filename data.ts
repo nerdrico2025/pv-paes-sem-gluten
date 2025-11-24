@@ -71,7 +71,7 @@ const catalog = {
     reviews: 25, 
     format: 'Livro Digital', 
     price: '47,90',
-    link: 'https://payfast.greenn.com.br/85615/offer/QgiCbr'
+    link: 'https://payfast.greenn.com.br/redirect/244930'
   },
   acompanhamentos: { 
     id: 2, 
@@ -264,7 +264,7 @@ export const receitasBoasFestasData: ProductData = {
       originalPrice: '97,90',
       discountAmount: '50,00',
       discountPercentage: '51%',
-      purchaseLink: 'https://payfast.greenn.com.br/85615/offer/QgiCbr',
+      purchaseLink: 'https://payfast.greenn.com.br/redirect/244930',
       descriptionShort: 'Torne suas celebrações inesquecíveis com receitas festivas, deliciosas e totalmente livres de glúten para compartilhar com quem você ama.'
     },
     details: {
