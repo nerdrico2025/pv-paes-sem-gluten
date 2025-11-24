@@ -34,10 +34,10 @@ const Header = () => {
                         <button className="p-2 lg:hidden">
                             <MenuIcon />
                         </button>
-                        <Link to="/" className="flex items-center space-x-3">
+                        <div className="flex items-center space-x-3">
                             <img src="https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/logo_chefglutenfree-red.png" alt="ChefGlutenFree Logo" className="h-10" />
                             <span className="text-2xl font-bold">ChefGlutenFree</span>
-                        </Link>
+                        </div>
                     </div>
 
                     <div className="hidden lg:flex flex-1 items-center justify-center mx-8 space-x-8">

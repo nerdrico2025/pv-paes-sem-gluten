@@ -128,6 +128,30 @@ const catalog = {
     format: 'Livro Digital', 
     price: '85,90',
     link: 'https://payfast.greenn.com.br/95807/offer/XXp325'
+  },
+  mix1: {
+    id: 8,
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-ebook-mix1.webp',
+    title: 'Caderno de Receitas Mix1 de Farinhas',
+    rating: 5,
+    reviews: 37,
+    format: 'Livro Digital',
+    price: '14,90',
+    tag: 'Pré-venda',
+    tagColor: 'bg-blue-600 text-white',
+    link: 'https://payfast.greenn.com.br/147048/offer/65C6gC'
+  },
+  mix2: {
+    id: 9,
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-ebook-mix2.webp',
+    title: 'Caderno de Receitas Mix2 de Farinhas',
+    rating: 5,
+    reviews: 59,
+    format: 'Livro Digital',
+    price: '19,90',
+    tag: 'Pré-venda',
+    tagColor: 'bg-blue-600 text-white',
+    link: 'https://payfast.greenn.com.br/147050/offer/JqmmF1'
   }
 };
 
@@ -208,7 +232,9 @@ export const paesSemGlutenData: ProductData = {
     catalog.pascoa,
     catalog.massas,
     catalog.bebidas,
-    catalog.farinhas
+    catalog.farinhas,
+    catalog.mix1,
+    catalog.mix2
   ],
   highlights: {
     title: "Descubra os Segredos do Pão Perfeito",
@@ -287,7 +313,9 @@ export const receitasBoasFestasData: ProductData = {
         catalog.pascoa,
         catalog.massas,
         catalog.bebidas,
-        catalog.farinhas
+        catalog.farinhas,
+        catalog.mix1,
+        catalog.mix2
       ],
     highlights: {
         title: "Descubra os Segredos do Natal Sem Glúten",
