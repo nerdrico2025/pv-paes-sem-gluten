@@ -5,58 +5,47 @@ import React from 'react';
 const reviewsData: Review[] = [
   {
     id: 1,
-    author: 'Ana Leite',
-    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/ana-lucia.webp',
+    author: 'Fernanda DBF',
+    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/fernanda-depo.png',
     rating: 5,
     title: 'O Melhor pão sem Glúten que eu Já fiz. Muito obrigado pelo ebook!',
     date: '28 de outubro de 2024',
     verified: true,
-    content: 'Eu comprei para minha filha, Aline, na pré-venda. O livro chegou magicamente no aniversário dela. Ela ficou tão feliz e entusiasmada. Estas são as palavras dela: "Um item obrigatório para quem foi diagnosticado com doença celíaca!"',
-    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao1.webp'
+    content: 'Meu pão de maçã acabou de sair do forno.\nSalivando aqui, não vejo à hora de provar. 😋\nA massa crua já estava boa, imagine assada.💕\nGratidão Luciene por cada receita compartilhada. 🤍',
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao-fernanda.webp'
   },
   {
     id: 2,
-    author: 'Fernanda Lucena',
-    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/fernanda.webp',
+    author: 'Márcia',
+    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/marcia-depo.png',
     rating: 5,
     title: 'Recomendo muito o livro Sem Glúten!!!',
     date: '24 de outubro de 2024',
     verified: true,
-    content: 'Acabei de fazer a minha, gente!!! Quem ainda não comprou, corre, pois as receitas são uma delícia! Nem parece que é sem glúten. Gratidão!',
-    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao2.webp'
+    content: '🥰Bom dia 🍞 chefinha, ontem fiz uma receita de pão deliciosa..Vou postar.',
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao-marcia.webp'
   },
   {
     id: 3,
-    author: 'Edney Alcântara',
-    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/thiago.webp',
+    author: 'Teresa de Souza',
+    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/teresa-depo.png',
     rating: 5,
     title: 'O livro definitivo de pão gf para todos os níveis',
     date: '30 de setembro de 2024',
     verified: true,
-    content: 'É difícil explicar o quão incrível este livro é para quem já lutou com o pão sem glúten borrachudo e gomoso que conhecemos, a tristeza de comprar as farinhas para uma receita aleatória da internet apenas para ter um resultado como uma esponja... Parabéns! Gosto e utilizo as receitas maravilhosos do ebook.',
-    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao3.webp'
+    content: 'Bom dia Luciene meu pão de batata doce ficou uma delícia muito obrigada❤️Tereza!!!!😘',
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao-tereza.webp'
   },
   {
     id: 4,
-    author: 'Alexandre Romano',
-    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/roberto-silva.webp',
+    author: 'Felipe Ribeiro',
+    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/felipe-depo.webp',
     rating: 5,
     title: 'Verdadeiramente os MELHORES livros de panificação artesanal sem glúten',
     date: '02 de novembro de 2024',
     verified: true,
-    content: 'Este é um item OBRIGATÓRIO para assar sem glúten! Até agora, tudo o que fizemos tem sido delicioso! Fizemos pão de fermentação natural, baguetes e pãezinhos de canela. Depois de experimentar uma receita, compramos um de seus livros anteriores também, eles são TÃO BONS.',
-    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao4.webp'
-  },
-  {
-    id: 5,
-    author: 'Joana Carla',
-    profileImageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/claudia-depoimento.webp',
-    rating: 5,
-    title: 'As melhores receitas sem glúten!',
-    date: '02 de novembro de 2024',
-    verified: true,
-    content: 'Fiquei maravilhada com esta livro da Dra. Luciene e como as receitas saíram! Nunca imaginei que poderia assar sobremesas e pães fofos tão deliciosos sendo celíaca.',
-    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao5.webp'
+    content: 'Fiz o pão de linhaça. Foi basicamente o primeiro pão que eu fiz e tive um resultado muito bom! Ficou muito gostoso e a receita foi super fácil de seguir. O vídeo dessa receita está com o título de "Pão de Linhaça Fácil Mix 2" lá no canal do Chef GlutenFree para quem tbm quiser tentar.',
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/pao-felipe.webp'
   }
 ];
 
@@ -98,7 +87,7 @@ const catalog = {
   },
   pascoa: { 
     id: 3, 
-    imageUrl: 'https://picsum.photos/seed/related3/400/600', 
+    imageUrl: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/capa-pascoa-para-todos.webp', 
     title: 'Páscoa sem Glúten', 
     rating: 4.5, 
     reviews: 19, 
@@ -179,7 +168,7 @@ export const paesSemGlutenData: ProductData = {
         React.createElement('p', null, 'Dra. Luciene Marques')
       )
     ),
-    authorBio: 'Dra. Luciene Marques é uma renomada fisioterapeuta em terapia intensiva e chef do canal especializado ChefGlutenFree. Com anos de pesquisa e prática, ela se dedica a criar receitas deliciosas e saudáveis para pessoas com restrições alimentares. Seus trabalhos foram apresentados em diversas publicações de saúde e bem-estar, além de ter mais de 800 vídeos sobre receitas sem glúten na internet.',
+    authorBio: 'Dra. Luciene Marques é uma renomada fisioterapeuta em saúde integrativa e chef do canal especializado ChefGlutenFree. Com anos de pesquisa e prática, ela se dedica a criar receitas deliciosas e saudáveis para pessoas com restrições alimentares. Seus trabalhos foram apresentados em diversas publicações de saúde e bem-estar, além de ter mais de 800 vídeos sobre receitas sem glúten na internet.',
     authorImage: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/perfil-luciene.webp',
     specs: {
       publisher: 'ChefGlutenFree',
@@ -260,7 +249,7 @@ export const receitasBoasFestasData: ProductData = {
         React.createElement('p', { className: 'mb-4' }, 'Cada receita foi criada pensando em trazer sabor alegria e saúde para as suas festas se você quer fazer deste final de ano uma celebração especial este ebook é para você para adquirir é fácil clique no botão abaixo e você será direcionado para página de pagamento onde poderá comprar e baixar o ebook Boas Festas sem Glúten instantaneamente.'),
         React.createElement('p', { className: 'font-semibold' }, 'Não deixe de aproveitar esta oportunidade de fazer da sua festa um momento ainda mais saboroso e Alegre Boas Festas e Feliz final de ano com o Chef Gluten Free.')
       ),
-      authorBio: 'Dra. Luciene Marques é uma renomada fisioterapeuta em terapia intensiva e chef do canal especializado ChefGlutenFree. Com anos de pesquisa e prática, ela se dedica a criar receitas deliciosas e saudáveis para pessoas com restrições alimentares.',
+      authorBio: 'Dra. Luciene Marques é uma renomada fisioterapeuta em saúde integrativa e chef do canal especializado ChefGlutenFree. Com anos de pesquisa e prática, ela se dedica a criar receitas deliciosas e saudáveis para pessoas com restrições alimentares. Seus trabalhos foram apresentados em diversas publicações de saúde e bem-estar, além de ter mais de 800 vídeos sobre receitas sem glúten na internet.',
       authorImage: 'https://eqtzcwqbtcswcfzcfber.supabase.co/storage/v1/object/public/chefglutenfree/perfil-luciene.webp',
       specs: {
         publisher: 'ChefGlutenFree',
