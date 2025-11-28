@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KW8XXGHN');</script>
-    <!-- End Google Tag Manager -->
+    <script>
+      (function(){
+        var h = location.hash;
+        if (h) {
+          // Aceita padrões como "#/rota" ou "#rota"
+          var hasSlash = h.startsWith('#/');
+          var path = hasSlash ? h.slice(1) : '/' + h.slice(1);
+          // Mantém query string, remove apenas o hash
+          if (path && path !== '/#' && path !== '/%23' && path !== '/#/' && path !== '/%23/') {
+            var qs = location.search || '';
+            // Redireciona antes do app carregar
+            location.replace(path + qs);
+          }
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,13 +34,25 @@
     "@remix-run/router": "https://esm.sh/@remix-run/router@1.21.0"
   }
 }
-</script>
-</head>
+  </script>
+  <script type="module">
+    const host = location.hostname
+    const enableAnalytics = host !== 'localhost' && host !== '127.0.0.1'
+    if (enableAnalytics) {
+      const i = 'GTM-KW8XXGHN'
+      const l = 'dataLayer'
+      window[l] = window[l] || []
+      window[l].push({ 'gtm.start': Date.now(), event: 'gtm.js' })
+      const f = document.getElementsByTagName('script')[0]
+      const j = document.createElement('script')
+      const dl = l !== 'dataLayer' ? '&l=' + l : ''
+      j.async = true
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+      f.parentNode.insertBefore(j, f)
+    }
+  </script>
+  </head>
   <body class="bg-gray-100">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KW8XXGHN"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
