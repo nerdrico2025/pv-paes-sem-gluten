@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -23,6 +23,19 @@ const PurchaseConfirmationPage = () => {
   // If we found data, use its related products, otherwise fallback to default
   const relatedProducts = productData ? productData.relatedProducts : paesSemGlutenData.relatedProducts;
   const productTitle = productData ? productData.info.title : 'nosso produto';
+
+  // Dispara o evento para o GTM assim que a página carrega
+  useEffect(() => {
+    // Verifica se o dataLayer existe (injetado pelo GTM no index.html)
+    const dataLayer = (window as any).dataLayer || [];
+    
+    dataLayer.push({
+      event: 'compra_realizada', // Nome do evento para criar gatilho no GTM
+      pagePath: window.location.pathname,
+      productSlug: slug,
+      productTitle: productTitle
+    });
+  }, [slug, productTitle]);
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
