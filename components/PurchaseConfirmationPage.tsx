@@ -24,29 +24,19 @@ const PurchaseConfirmationPage = () => {
   const relatedProducts = productData ? productData.relatedProducts : paesSemGlutenData.relatedProducts;
   const productTitle = productData ? productData.info.title : 'nosso produto';
 
-  // Dispara o evento para o GTM assim que a página carrega
+  // Dispara o evento para o GTM quando estiver pronto
   useEffect(() => {
-    // Verifica se o dataLayer existe (injetado pelo GTM no index.html)
-    const dataLayer = (window as any).dataLayer || [];
-    // Deduplicação simples por sessão: evita reenviar purchase ao recarregar
     const keyBase = slug || (productData && (productData as any).id) || 'unknown';
     const sentKey = `purchase_sent:${keyBase}`;
     if (typeof window !== 'undefined' && window.sessionStorage?.getItem(sentKey)) {
       return;
     }
 
-    // Converte o preço (ex: "79,90") para number (79.90)
     const priceString = productData ? productData.info.price : "0,00";
     const priceNumber = parseFloat(priceString.replace(',', '.'));
-
-    // Gera um ID de transação fictício baseado no tempo, já que não temos backend
     const transactionId = `T_${Date.now()}`;
 
-    // Limpa o objeto ecommerce anterior (boa prática do GA4)
-    dataLayer.push({ ecommerce: null });
-
-    // Envia o evento purchase padrão do GA4
-    dataLayer.push({
+    const payload = {
       event: 'purchase',
       ecommerce: {
         transaction_id: transactionId,
@@ -63,16 +53,24 @@ const PurchaseConfirmationPage = () => {
           }
         ]
       }
-    });
+    };
 
-    // Marca como enviado nesta sessão
-    if (typeof window !== 'undefined') {
-      try {
-        window.sessionStorage?.setItem(sentKey, String(transactionId));
-      } catch (e) {
-        void e
+    let tries = 0;
+    const maxTries = 10; // ~5s com passo de 500ms
+    const tick = () => {
+      const ready = (window as any).google_tag_manager || ((window as any).dataLayer && Array.isArray((window as any).dataLayer));
+      if (ready) {
+        const dataLayer = (window as any).dataLayer || [];
+        dataLayer.push({ ecommerce: null });
+        dataLayer.push(payload);
+        try { window.sessionStorage?.setItem(sentKey, String(transactionId)); } catch (e) { void e }
+        return;
       }
-    }
+      if (tries++ < maxTries) {
+        setTimeout(tick, 500);
+      }
+    };
+    setTimeout(tick, 0);
   }, [slug, productTitle, productData]);
 
   return (
