@@ -28,7 +28,13 @@ const PurchaseConfirmationPage = () => {
   useEffect(() => {
     // Verifica se o dataLayer existe (injetado pelo GTM no index.html)
     const dataLayer = (window as any).dataLayer || [];
-    
+    // Deduplicação simples por sessão: evita reenviar purchase ao recarregar
+    const keyBase = slug || (productData && (productData as any).id) || 'unknown';
+    const sentKey = `purchase_sent:${keyBase}`;
+    if (typeof window !== 'undefined' && window.sessionStorage?.getItem(sentKey)) {
+      return;
+    }
+
     // Converte o preço (ex: "79,90") para number (79.90)
     const priceString = productData ? productData.info.price : "0,00";
     const priceNumber = parseFloat(priceString.replace(',', '.'));
@@ -58,6 +64,15 @@ const PurchaseConfirmationPage = () => {
         ]
       }
     });
+
+    // Marca como enviado nesta sessão
+    if (typeof window !== 'undefined') {
+      try {
+        window.sessionStorage?.setItem(sentKey, String(transactionId));
+      } catch (e) {
+        void e
+      }
+    }
   }, [slug, productTitle, productData]);
 
   return (

@@ -11,7 +11,7 @@
           // Mantém query string, remove apenas o hash
           if (path && path !== '/#' && path !== '/%23' && path !== '/#/' && path !== '/%23/') {
             var qs = location.search || '';
-            // Redireciona antes do app carregar
+            try { sessionStorage.setItem('hash_redirect_to', path + '|' + Date.now()); } catch (e) { void e }
             location.replace(path + qs);
           }
         }
