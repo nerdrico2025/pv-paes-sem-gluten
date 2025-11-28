@@ -29,13 +29,36 @@ const PurchaseConfirmationPage = () => {
     // Verifica se o dataLayer existe (injetado pelo GTM no index.html)
     const dataLayer = (window as any).dataLayer || [];
     
+    // Converte o preço (ex: "79,90") para number (79.90)
+    const priceString = productData ? productData.info.price : "0,00";
+    const priceNumber = parseFloat(priceString.replace(',', '.'));
+
+    // Gera um ID de transação fictício baseado no tempo, já que não temos backend
+    const transactionId = `T_${Date.now()}`;
+
+    // Limpa o objeto ecommerce anterior (boa prática do GA4)
+    dataLayer.push({ ecommerce: null });
+
+    // Envia o evento purchase padrão do GA4
     dataLayer.push({
-      event: 'compra_realizada', // Nome do evento para criar gatilho no GTM
-      pagePath: window.location.pathname,
-      productSlug: slug,
-      productTitle: productTitle
+      event: 'purchase',
+      ecommerce: {
+        transaction_id: transactionId,
+        value: priceNumber,
+        tax: 0,
+        shipping: 0,
+        currency: 'BRL',
+        items: [
+          {
+            item_name: productTitle,
+            item_id: productData?.id || slug,
+            price: priceNumber,
+            quantity: 1
+          }
+        ]
+      }
     });
-  }, [slug, productTitle]);
+  }, [slug, productTitle, productData]);
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
