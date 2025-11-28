@@ -8,11 +8,25 @@ function PageView() {
   const location = useLocation();
   React.useEffect(() => {
     const dl: any[] = (window as any).dataLayer || [];
-    dl.push({
-      event: 'page_view',
-      page_path: location.pathname,
-      page_title: document.title
-    });
+    let shouldSend = true;
+    try {
+      const v = sessionStorage.getItem('hash_redirect_to');
+      if (v) {
+        const [p, t] = v.split('|');
+        const ts = parseInt(t, 10);
+        if (p === location.pathname && !Number.isNaN(ts) && Date.now() - ts < 3000) {
+          shouldSend = false;
+        }
+        sessionStorage.removeItem('hash_redirect_to');
+      }
+    } catch (e) { void e }
+    if (shouldSend) {
+      dl.push({
+        event: 'page_view',
+        page_path: location.pathname,
+        page_title: document.title
+      });
+    }
   }, [location.pathname]);
   return null;
 }
