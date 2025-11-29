@@ -63,6 +63,20 @@ const PurchaseConfirmationPage = () => {
         const dataLayer = (window as any).dataLayer || [];
         dataLayer.push({ ecommerce: null });
         dataLayer.push(payload);
+        // Evento alternativo para compatibilidade com triggers customizados
+        dataLayer.push({ event: 'order_completed', ...payload });
+        // Fallback direto via gtag, se disponível
+        const gtag = (window as any).gtag as undefined | ((cmd: string, name: string, params: any) => void);
+        if (typeof gtag === 'function') {
+          try {
+            gtag('event', 'purchase', {
+              transaction_id: transactionId,
+              value: priceNumber,
+              currency: 'BRL',
+              items: payload.ecommerce.items
+            });
+          } catch (e) { void e }
+        }
         try { window.sessionStorage?.setItem(sentKey, String(transactionId)); } catch (e) { void e }
         return;
       }
