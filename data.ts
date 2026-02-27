@@ -95,7 +95,7 @@ const catalog = {
     price: '47,90', 
     tag: 'Recém-lançado', 
     tagColor: 'border-gray-500',
-    link: 'https://payfast.greenn.com.br/85616/offer/EVO92z'
+    link: 'https://pay.hotmart.com/Q91554204V?off=wq5zvrec&checkoutMode=10'
   },
   massas: { 
     id: 4, 
